@@ -14,8 +14,13 @@ public class MMonoBehaviour : MonoBehaviour
         this.LoadComponents();
     }
 
+    protected virtual void Start()
+    {
+        //override
+    }
+
     protected virtual void LoadComponents()
     {
-        // For override
+        //override
     }
 }
