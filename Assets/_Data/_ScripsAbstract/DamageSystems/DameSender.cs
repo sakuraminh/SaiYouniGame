@@ -52,4 +52,6 @@ public abstract class DameSender : MMonoBehaviour
     {
 
     }
+
+
 }

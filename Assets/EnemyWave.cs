@@ -27,10 +27,11 @@ public class EnemyWave : MMonoBehaviour
     protected virtual void Spawning()
     {
         Invoke(nameof(this.Spawning), this.spawnSpeed);
-        if (this.spawnedEnemies.Count >= this.maxSpawn - 1) return;
+        if (this.spawnedEnemies.Count >= this.maxSpawn) return;
 
         EnemyCtrl prefab = EnemyCtrlSingleton.Instance.EnemyPrefab.GetRandom();
         EnemyCtrl newEnemy = EnemyCtrlSingleton.Instance.EnemySpawner.Spawn(prefab, GetPos().transform.position);
+        newEnemy.EnemyDameReceive.ResetCurrenHp();
         newEnemy.gameObject.SetActive(true);
         this.spawnedEnemies.Add(newEnemy);
 

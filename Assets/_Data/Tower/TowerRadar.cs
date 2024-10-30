@@ -10,6 +10,7 @@ public class TowerRadar : MMonoBehaviour
     [SerializeField] protected SphereCollider _collider;
     [SerializeField] protected Rigidbody _rigibody;
     [SerializeField] protected List<EnemyCtrl> enemies;
+    [SerializeField] protected List<EnemyCtrl> enemiesDelete;
 
     protected virtual void FixedUpdate()
     {
@@ -21,7 +22,7 @@ public class TowerRadar : MMonoBehaviour
         Targetable targetable = collider.GetComponent<Targetable>();
         if (targetable == null) return;
 
-        EnemyCtrl enemyCtrl = collider.GetComponentInParent<EnemyCtrl>();
+        EnemyCtrl enemyCtrl = targetable.GetComponentInParent<EnemyCtrl>();
         if (enemyCtrl == null) return;
 
         this.AddEnemy(enemyCtrl);
@@ -76,14 +77,11 @@ public class TowerRadar : MMonoBehaviour
         float enemyDistance;
         foreach (EnemyCtrl enemyCtrl in this.enemies)
         {
-            //if (this.nearest.EnemyDameReceive.IsDead())
-            //{
-            //    this.enemies.Remove(this.nearest);
-            //    this.nearest = null;
-            //    continue;
-            //}
-
-            return
+            if (enemyCtrl.EnemyDameReceive.IsDead())
+            {
+                this.enemiesDelete.Add(enemyCtrl);
+                continue;
+            }
 
             enemyDistance = Vector3.Distance(transform.position, enemyCtrl.transform.position);
             if (enemyDistance < nearestDistance)
@@ -92,10 +90,20 @@ public class TowerRadar : MMonoBehaviour
                 this.nearest = enemyCtrl;
             }
         }
+        this.DeleteEnemyDie();
+        this.enemiesDelete.Clear();
     }
 
     public virtual EnemyCtrl GetTarget()
     {
         return this.nearest;
+    }
+
+    protected virtual void DeleteEnemyDie()
+    {
+        foreach (EnemyCtrl enemy in this.enemiesDelete)
+        {
+            this.enemies.Remove(enemy);
+        }
     }
 }

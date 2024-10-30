@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class DameReceive : MMonoBehaviour
 {
     [SerializeField] int currenHp = 10;
-    //[SerializeField] int maxHp = 10;
+    [SerializeField] int maxHp = 10;
     [SerializeField] bool isImmortal = false;
 
     [SerializeField] protected Collider _collider;
@@ -75,5 +75,10 @@ public abstract class DameReceive : MMonoBehaviour
     private void LoadMoving()
     {
         this.moving = transform.parent.GetComponentInChildren<Moving>();
+    }
+
+    public virtual void ResetCurrenHp()
+    {
+        this.currenHp = this.maxHp;
     }
 }
