@@ -15,6 +15,7 @@ public abstract class DameReceive : MMonoBehaviour
     [SerializeField] protected Animator animator;
 
     [SerializeField] bool isDead = false;
+    public bool IsDead => this.isDead;
     [SerializeField] protected bool isHit = false;
     [SerializeField] protected Moving moving;
 
@@ -49,7 +50,7 @@ public abstract class DameReceive : MMonoBehaviour
         if (!isImmortal) this.currenHp -= dame;
         if (currenHp < 0) currenHp = 0;
 
-        if (this.IsDead()) this.OnDead();
+        if (this.SetIsDead()) this.OnDead();
         else this.OnHurt();
     }
 
@@ -57,7 +58,7 @@ public abstract class DameReceive : MMonoBehaviour
 
     protected abstract void OnDead();
 
-    public virtual bool IsDead()
+    public virtual bool SetIsDead()
     {
         return this.isDead = this.currenHp <= 0;
     }

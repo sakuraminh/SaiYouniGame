@@ -48,7 +48,7 @@ public class EnemyWave : MMonoBehaviour
     {
         foreach (EnemyCtrl enemyCtrl in this.spawnedEnemies)
         {
-            if (enemyCtrl.EnemyDameReceive.IsDead())
+            if (enemyCtrl.EnemyDameReceive.SetIsDead())
             {
                 this.spawnedEnemies.Remove(enemyCtrl);
                 return;

@@ -34,12 +34,21 @@ public class Moving : EnemyAbs
     protected virtual void MovingToTarget()
     {
         this.MovingStatus();
-        if (this.isFinish)
+        //Debug.Log(transform.parent.gameObject.name + this.isMoving, transform.parent.gameObject);
+        if (this.isFinish && enemyCtrl.EnemyDameReceive.IsDead)
         {
             this.enemyCtrl.Agent.isStopped = this.isFinish;
             Debug.Log("Finish", gameObject);
             return;
         }
+
+        if (!isMoving)
+        {
+            this.enemyCtrl.Agent.isStopped = !isMoving;
+            return;
+        }
+
+
         this.enemyCtrl.Agent.SetDestination(this.targetPoint.Targets[this.targetIndex].transform.position);
         this.GetNextPoint();
     }
@@ -58,6 +67,12 @@ public class Moving : EnemyAbs
 
     protected virtual void MovingStatus()
     {
+        if (enemyCtrl.EnemyDameReceive.IsDead)
+        {
+            this.isMoving = !enemyCtrl.EnemyDameReceive.IsDead;
+            this.EnemyCtrl.Animator.SetBool("isMoving", this.isMoving);
+            return;
+        }
         this.isMoving = !EnemyCtrl.Agent.isStopped;
         this.EnemyCtrl.Animator.SetBool("isMoving", this.isMoving);
     }

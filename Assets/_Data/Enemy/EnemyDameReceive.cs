@@ -22,6 +22,12 @@ public class EnemyDameReceive : DameReceive
 
     protected override void OnDead()
     {
+        enemyCtrl.Animator.SetBool("isDead", enemyCtrl.EnemyDameReceive.IsDead);
+        Invoke(nameof(GetDespawn), 4f);
+    }
+
+    protected virtual void GetDespawn()
+    {
         this.enemyCtrl.Despawn.DoDespawn();
     }
 

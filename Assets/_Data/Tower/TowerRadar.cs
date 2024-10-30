@@ -77,7 +77,7 @@ public class TowerRadar : MMonoBehaviour
         float enemyDistance;
         foreach (EnemyCtrl enemyCtrl in this.enemies)
         {
-            if (enemyCtrl.EnemyDameReceive.IsDead())
+            if (enemyCtrl.EnemyDameReceive.SetIsDead())
             {
                 this.enemiesDelete.Add(enemyCtrl);
                 continue;
