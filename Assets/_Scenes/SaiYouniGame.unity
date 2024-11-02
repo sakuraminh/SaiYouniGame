@@ -207,9 +207,8 @@ MonoBehaviour:
   parent: {fileID: 146874774}
   spawner: {fileID: 503176342}
   isDespawnByTime: 1
-  timeLife: 7
-  currentTime: 7
-  distance: 0
+  timeLife: 2
+  currentTime: 2
 --- !u!1 &100142942
 GameObject:
   m_ObjectHideFlags: 0

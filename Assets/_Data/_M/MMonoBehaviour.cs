@@ -19,6 +19,15 @@ public class MMonoBehaviour : MonoBehaviour
         //override
     }
 
+    protected virtual void OnEnable()
+    {
+        //override
+    }
+    protected virtual void OnDisable()
+    {
+        //override
+    }
+
     protected virtual void LoadComponents()
     {
         //override

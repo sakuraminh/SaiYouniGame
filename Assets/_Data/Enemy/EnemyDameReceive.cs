@@ -10,8 +10,10 @@ public class EnemyDameReceive : DameReceive
 
     protected override void OnDead()
     {
+        this.capsuleCollider.enabled = false;
         enemyCtrl.Animator.SetBool("isDead", enemyCtrl.EnemyDameReceive.IsDead);
-        this.CallDespawn();
+        Invoke(nameof(CallDespawn), 4f);
+        //this.CallDespawn();
     }
     protected override void OnHurt()
     {
@@ -48,6 +50,12 @@ public class EnemyDameReceive : DameReceive
         //}
     }
 
+    protected override void Reborn()
+    {
+        base.Reborn();
+        this.capsuleCollider.enabled = true;
+    }
+
 
     //============================================================================================================================================
 
@@ -56,6 +64,7 @@ public class EnemyDameReceive : DameReceive
     {
         base.LoadComponents();
         this.LoadEnemyCtrl();
+        this.LoadCapsuleCollider();
     }
     protected virtual void LoadEnemyCtrl()
     {
@@ -63,4 +72,12 @@ public class EnemyDameReceive : DameReceive
         this.enemyCtrl = transform.parent.GetComponent<EnemyCtrl>();
         Debug.Log(transform.name + ": LoadEnemyCtrl", gameObject);
     }
+    protected virtual void LoadCapsuleCollider()
+    {
+        if (this.capsuleCollider != null) return;
+        this.capsuleCollider = GetComponent<CapsuleCollider>();
+        Debug.Log(transform.name + ": LoadEnemyCtrl", gameObject);
+    }
+
+
 }

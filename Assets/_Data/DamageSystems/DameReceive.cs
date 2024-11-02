@@ -6,12 +6,21 @@ using UnityEngine;
 
 public abstract class DameReceive : MMonoBehaviour
 {
+    [SerializeField] protected CapsuleCollider capsuleCollider;
     [SerializeField] protected bool isImmortal = false;
     [SerializeField] protected bool isHit = false;
     [SerializeField] protected bool isDead = false;
     public bool IsDead => this.isDead;
     [SerializeField] protected int currenHp = 10;
     [SerializeField] protected int maxHp = 10;
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        this.Reborn();
+    }
+
+
 
     //============================================================================================================================================
 
@@ -41,7 +50,7 @@ public abstract class DameReceive : MMonoBehaviour
     {
         return this.isDead = this.currenHp <= 0;
     }
-    public virtual void ResetCurrenHp()
+    protected virtual void Reborn()
     {
         this.currenHp = this.maxHp;
     }

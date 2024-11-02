@@ -21,6 +21,7 @@ public abstract class EnemyCtrl : PoolObj
     public EnemyDameReceive EnemyDameReceive => this.enemyDameReceive;
 
 
+
     //============================================================================================================================================
 
     protected override void LoadComponents()

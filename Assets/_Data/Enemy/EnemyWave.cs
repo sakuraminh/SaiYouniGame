@@ -26,7 +26,6 @@ public class EnemyWave : MMonoBehaviour
 
         EnemyCtrl prefab = EnemyCtrlSingleton.Instance.EnemyPrefab.GetRandom();
         EnemyCtrl newEnemy = EnemyCtrlSingleton.Instance.EnemySpawner.Spawn(prefab, GetPos().transform.position);
-        newEnemy.EnemyDameReceive.ResetCurrenHp();
         newEnemy.gameObject.SetActive(true);
         this.spawnedEnemies.Add(newEnemy);
     }
@@ -40,7 +39,7 @@ public class EnemyWave : MMonoBehaviour
         //if (this.spawnedEnemies == null) return;
         foreach (EnemyCtrl enemyCtrl in this.spawnedEnemies)
         {
-            if (enemyCtrl.EnemyDameReceive.IsDead)
+            if (enemyCtrl.EnemyDameReceive.SetIsDead())
             {
                 this.enemiDead.Add(enemyCtrl);
             }
