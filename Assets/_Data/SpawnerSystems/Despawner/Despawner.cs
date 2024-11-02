@@ -11,9 +11,10 @@ public abstract class Despawner<T> : DespawnBase where T : PoolObj
     [SerializeField] protected float timeLife = 7;
     [SerializeField] protected float currentTime = 7;
 
+
     protected virtual void Update()
     {
-        // this.DespawnByTime();
+        //Override
     }
 
     protected override void LoadComponents()
@@ -22,7 +23,6 @@ public abstract class Despawner<T> : DespawnBase where T : PoolObj
         this.LoadParent();
         this.LoadSpawn();
     }
-
     protected virtual void LoadParent()
     {
         if (this.parent != null) return;

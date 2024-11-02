@@ -7,6 +7,7 @@ public class EnemyWave : MMonoBehaviour
     [SerializeField] protected float spawnSpeed = 5f;
     [SerializeField] protected int maxSpawn = 10;
     [SerializeField] protected List<EnemyCtrl> spawnedEnemies = new();
+    [SerializeField] protected List<EnemyCtrl> enemiDead = new();
 
     protected override void Start()
     {
@@ -16,14 +17,8 @@ public class EnemyWave : MMonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        this.RemoveDeadOne();
+        this.CheckDead();
     }
-
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-    }
-
     protected virtual void Spawning()
     {
         Invoke(nameof(this.Spawning), this.spawnSpeed);
@@ -34,25 +29,31 @@ public class EnemyWave : MMonoBehaviour
         newEnemy.EnemyDameReceive.ResetCurrenHp();
         newEnemy.gameObject.SetActive(true);
         this.spawnedEnemies.Add(newEnemy);
-
-
     }
-
     protected virtual SpawnPointCtrl GetPos()
     {
         SpawnPointCtrl newPoint = SpawnPointCtrlSingleton.Instance.GetRandomPoint(SpawnPointCtrlSingleton.Instance.ListSpawnPoint.Count, SpawnPointCtrlSingleton.Instance.ListSpawnPoint);
         return newPoint;
     }
-
-    protected virtual void RemoveDeadOne()
+    public virtual void CheckDead()
     {
+        //if (this.spawnedEnemies == null) return;
         foreach (EnemyCtrl enemyCtrl in this.spawnedEnemies)
         {
-            if (enemyCtrl.EnemyDameReceive.SetIsDead())
+            if (enemyCtrl.EnemyDameReceive.IsDead)
             {
-                this.spawnedEnemies.Remove(enemyCtrl);
-                return;
+                this.enemiDead.Add(enemyCtrl);
             }
         }
+        this.RemoveDead();
+    }
+    protected virtual void RemoveDead()
+    {
+        //if (this.enemiDead == null) return;
+        foreach (EnemyCtrl enemyCtrl in this.enemiDead)
+        {
+            this.spawnedEnemies.Remove(enemyCtrl);
+        }
+        this.enemiDead.Clear();
     }
 }

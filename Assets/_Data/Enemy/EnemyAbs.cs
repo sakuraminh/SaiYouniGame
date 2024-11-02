@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAbs : MMonoBehaviour
+public abstract class EnemyAbs : MMonoBehaviour
 {
     [SerializeField] protected EnemyCtrl enemyCtrl;
     public EnemyCtrl EnemyCtrl => this.enemyCtrl;
@@ -17,6 +17,6 @@ public class EnemyAbs : MMonoBehaviour
     {
         if (this.enemyCtrl != null) return;
         Debug.Log("LoadComponent", gameObject);
-        this.enemyCtrl = transform.parent.GetComponentInParent<EnemyCtrl>();
+        this.enemyCtrl = transform.parent.GetComponent<EnemyCtrl>();
     }
 }

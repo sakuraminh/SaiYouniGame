@@ -296,11 +296,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34ea1fc520ddd9428a798e860fc4759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCtrl: {fileID: 0}
+  enemyCtrl: {fileID: 7635019488508445099}
   targetPoint: {fileID: 0}
   targetIndex: 0
   distance: Infinity
-  distanceLimit: 1
+  distanceLimit: 2
   isFinish: 0
   isMoving: 0
 --- !u!1 &1038954058947005594
@@ -769,6 +769,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3125344455232600745}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2042333415866173444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5135260910729341168}
+  - component: {fileID: 1015256666522132065}
+  m_Layer: 0
+  m_Name: Despawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5135260910729341168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042333415866173444}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.139999, y: 0, z: -48}
+  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1710139521083801000}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1015256666522132065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042333415866173444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c1d324da2f754419f7553b6a7ac7f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 7635019488508445099}
+  spawner: {fileID: 0}
+  isDespawnByTime: 1
+  timeLife: 7
+  currentTime: 7
 --- !u!1 &2268823550183248086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,7 +1706,7 @@ Transform:
   m_GameObject: {fileID: 6308963805168624083}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1725,7 +1774,7 @@ Transform:
   m_GameObject: {fileID: 6461109134775855923}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.4839993, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1743,8 +1792,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80a200c1ed35bae489a5a5c6c27e9263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currenHp: 10
+  isImmortal: 0
+  isHit: 0
   isDead: 0
+  currenHp: 10
+  maxHp: 10
+  enemyCtrl: {fileID: 7635019488508445099}
 --- !u!136 &3050997780364480900
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1760,7 +1813,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1879,7 +1932,7 @@ Animator:
   m_GameObject: {fileID: 6847143164516990954}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d900f93052aba9f48b5783a4a3fc5f3c, type: 2}
+  m_Controller: {fileID: 9100000, guid: d6035c0757761574d95a3147d691a412, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2294,7 +2347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1710139521083801000
 Transform:
   m_ObjectHideFlags: 0
@@ -2312,6 +2365,7 @@ Transform:
   - {fileID: 6257021559404635163}
   - {fileID: 6939916279299506670}
   - {fileID: 7513437914586185641}
+  - {fileID: 5135260910729341168}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &6035468472823905745
@@ -2324,7 +2378,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2348,6 +2402,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1caa48b0d69dc146a2db9ac6a7f7487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawn: {fileID: 1015256666522132065}
+  agent: {fileID: 6035468472823905745}
+  animator: {fileID: 8660461656936852286}
+  moving: {fileID: 2746067678579393712}
+  targetable: {fileID: 1019443902526321469}
+  enemyDameReceive: {fileID: 4519450173758073387}
 --- !u!1 &8764334131716075815
 GameObject:
   m_ObjectHideFlags: 0

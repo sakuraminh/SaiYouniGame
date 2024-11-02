@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class TowerCtrl : MMonoBehaviour
 {
-    [SerializeField] protected TowerRadar radar;
-    public TowerRadar Radar => radar;
+    [SerializeField] protected TowerRadar towerRadar;
+    public TowerRadar TowerRadar => towerRadar;
 
     [SerializeField] protected Transform rotator;
     public Transform Rotator => rotator;
@@ -19,8 +19,8 @@ public abstract class TowerCtrl : MMonoBehaviour
 
     protected virtual void LoadRadar()
     {
-        if (this.radar != null) return;
-        this.radar = GetComponentInChildren<TowerRadar>();
+        if (this.towerRadar != null) return;
+        this.towerRadar = GetComponentInChildren<TowerRadar>();
         Debug.Log(transform.name + ": LoadRadar", gameObject);
     }
 

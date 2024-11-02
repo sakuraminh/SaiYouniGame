@@ -20,6 +20,9 @@ public abstract class EnemyCtrl : PoolObj
     [SerializeField] protected EnemyDameReceive enemyDameReceive;
     public EnemyDameReceive EnemyDameReceive => this.enemyDameReceive;
 
+
+    //============================================================================================================================================
+
     protected override void LoadComponents()
     {
         base.LoadComponents();

@@ -12,11 +12,12 @@ public class TowerRadar : MMonoBehaviour
     [SerializeField] protected List<EnemyCtrl> enemies;
     [SerializeField] protected List<EnemyCtrl> enemiesDelete;
 
+    //============================================================================================================================================
+
     protected virtual void FixedUpdate()
     {
-        this.FindNearest();
+        this.FindDead();
     }
-
     protected virtual void OnTriggerEnter(Collider collider)
     {
         Targetable targetable = collider.GetComponent<Targetable>();
@@ -27,7 +28,6 @@ public class TowerRadar : MMonoBehaviour
 
         this.AddEnemy(enemyCtrl);
     }
-
     protected virtual void OnTriggerExit(Collider collider)
     {
         EnemyCtrl enemyCtrl = collider.GetComponentInParent<EnemyCtrl>();
@@ -35,6 +35,73 @@ public class TowerRadar : MMonoBehaviour
 
         this.RemoveEnemy(enemyCtrl);
     }
+    protected virtual void AddEnemy(EnemyCtrl enemyCtrl)
+    {
+        this.enemies.Add(enemyCtrl);
+    }
+
+    protected virtual void RemoveEnemy(EnemyCtrl enemyCtrl)
+    {
+        if (this.nearest == enemyCtrl) this.nearest = null;
+        this.enemies.Remove(enemyCtrl);
+    }
+
+    protected virtual void FindDead()
+    {
+        if (this.enemies.Count == 0)
+        {
+            this.nearest = null;
+            return;
+        }
+
+        foreach (EnemyCtrl enemyCtrl in this.enemies)
+        {
+            if (enemyCtrl.EnemyDameReceive.SetIsDead())
+            {
+                this.enemiesDelete.Add(enemyCtrl);
+                continue;
+            }
+        }
+        this.DeleteEnemyDie();
+
+    }
+
+    public virtual void FindNearest()
+    {
+        if (this.enemies == null)
+        {
+            this.nearest = null;
+            return;
+        }
+        float nearestDistance = Mathf.Infinity;
+        float enemyDistance;
+        foreach (EnemyCtrl enemyCtrl in this.enemies)
+        {
+            enemyDistance = Vector3.Distance(transform.position, enemyCtrl.transform.position);
+            if (enemyDistance < nearestDistance)
+            {
+                nearestDistance = enemyDistance;
+                this.nearest = enemyCtrl;
+            }
+        }
+    }
+
+    public virtual EnemyCtrl GetTarget()
+    {
+        return this.nearest;
+    }
+
+    protected virtual void DeleteEnemyDie()
+    {
+        foreach (EnemyCtrl enemy in this.enemiesDelete)
+        {
+            this.enemies.Remove(enemy);
+        }
+        this.enemiesDelete.Clear();
+        this.FindNearest();
+    }
+
+    //============================================================================================================================================
 
     protected override void LoadComponents()
     {
@@ -59,51 +126,5 @@ public class TowerRadar : MMonoBehaviour
         this._rigibody.useGravity = false;
         Debug.Log(transform.name + ": LoadRigidbody", gameObject);
     }
-
-    protected virtual void AddEnemy(EnemyCtrl enemyCtrl)
-    {
-        this.enemies.Add(enemyCtrl);
-    }
-
-    protected virtual void RemoveEnemy(EnemyCtrl enemyCtrl)
-    {
-        if (this.nearest == enemyCtrl) this.nearest = null;
-        this.enemies.Remove(enemyCtrl);
-    }
-
-    protected virtual void FindNearest()
-    {
-        float nearestDistance = Mathf.Infinity;
-        float enemyDistance;
-        foreach (EnemyCtrl enemyCtrl in this.enemies)
-        {
-            if (enemyCtrl.EnemyDameReceive.SetIsDead())
-            {
-                this.enemiesDelete.Add(enemyCtrl);
-                continue;
-            }
-
-            enemyDistance = Vector3.Distance(transform.position, enemyCtrl.transform.position);
-            if (enemyDistance < nearestDistance)
-            {
-                nearestDistance = enemyDistance;
-                this.nearest = enemyCtrl;
-            }
-        }
-        this.DeleteEnemyDie();
-        this.enemiesDelete.Clear();
-    }
-
-    public virtual EnemyCtrl GetTarget()
-    {
-        return this.nearest;
-    }
-
-    protected virtual void DeleteEnemyDie()
-    {
-        foreach (EnemyCtrl enemy in this.enemiesDelete)
-        {
-            this.enemies.Remove(enemy);
-        }
-    }
 }
+

@@ -9,6 +9,9 @@ public abstract class DameSender : MMonoBehaviour
     [SerializeField] protected int dame = 1;
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected Collider _collider;
+
+    //============================================================================================================================================
+
     protected virtual void OnTriggerEnter(Collider collider)
     {
         this.SendDamage(collider);
@@ -23,6 +26,8 @@ public abstract class DameSender : MMonoBehaviour
         damageReceiver.Receive(this.dame, this);
         return damageReceiver;
     }
+
+    //============================================================================================================================================
 
     protected override void LoadComponents()
     {
@@ -47,11 +52,4 @@ public abstract class DameSender : MMonoBehaviour
         this._collider.isTrigger = true;
         Debug.Log(transform.name + ": LoadTriggerCollider", gameObject);
     }
-
-    protected virtual void HitStatus()
-    {
-
-    }
-
-
 }

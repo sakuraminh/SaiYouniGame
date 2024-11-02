@@ -6,44 +6,21 @@ using UnityEngine;
 
 public abstract class DameReceive : MMonoBehaviour
 {
-    [SerializeField] int currenHp = 10;
-    [SerializeField] int maxHp = 10;
-    [SerializeField] bool isImmortal = false;
-
-    [SerializeField] protected Collider _collider;
-
-    [SerializeField] protected Animator animator;
-
-    [SerializeField] bool isDead = false;
-    public bool IsDead => this.isDead;
+    [SerializeField] protected bool isImmortal = false;
     [SerializeField] protected bool isHit = false;
-    [SerializeField] protected Moving moving;
+    [SerializeField] protected bool isDead = false;
+    public bool IsDead => this.isDead;
+    [SerializeField] protected int currenHp = 10;
+    [SerializeField] protected int maxHp = 10;
 
+    //============================================================================================================================================
 
-    private void OnTriggerEnter(Collider collider)
+    protected abstract void OnHurt();
+    protected abstract void OnDead();
+
+    protected virtual void OnTriggerEnter(Collider collider)
     {
-        this.OnAnimation(collider);
-    }
-
-    private void OnAnimation(Collider collider)
-    {
-        this.SetHit(collider);
-        this.animator.SetBool("isHit", this.isHit);
-        this.moving.EnemyCtrl.Agent.speed /= 4;
-        Invoke(nameof(SetHitFalse), 0.3f);
-    }
-
-    private void SetHitFalse()
-    {
-        this.isHit = false;
-        animator.SetBool("isHit", this.isHit);
-        this.moving.EnemyCtrl.Agent.speed = 2;
-    }
-
-    protected virtual void SetHit(Collider collider)
-    {
-        DameSender sender = collider.GetComponent<DameSender>();
-        this.isHit = sender != null;
+        //Override
     }
     public virtual void Receive(int dame, DameSender dameSender)
     {
@@ -54,32 +31,20 @@ public abstract class DameReceive : MMonoBehaviour
         else this.OnHurt();
     }
 
-    protected abstract void OnHurt();
-
-    protected abstract void OnDead();
+    //protected virtual void ActAfterDead()
+    //{
+    //    if (this.SetIsDead()) this.OnDead();
+    //    else this.OnHurt();
+    //}
 
     public virtual bool SetIsDead()
     {
         return this.isDead = this.currenHp <= 0;
     }
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        this.LoadAnimator();
-        this.LoadMoving();
-    }
-
-    private void LoadAnimator()
-    {
-        this.animator = transform.parent.GetComponentInChildren<Animator>();
-    }
-    private void LoadMoving()
-    {
-        this.moving = transform.parent.GetComponentInChildren<Moving>();
-    }
-
     public virtual void ResetCurrenHp()
     {
         this.currenHp = this.maxHp;
     }
+
+    //============================================================================================================================================
 }

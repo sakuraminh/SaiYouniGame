@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class TowerShooting : TowerAbstract
 
     protected virtual void GetTarget()
     {
-        this.target = this.ctrl.Radar.GetTarget();
+        this.target = this.ctrl.TowerRadar.GetTarget();
     }
 
     protected virtual void LookAtTarget()
@@ -46,6 +47,8 @@ public class TowerShooting : TowerAbstract
         EffectCtrl newBullet = EffectSpawnerCtrlSingleton.Instance.EffectSpawner.Spawn(EffectSpawnerCtrlSingleton.Instance.BulletCtrl, firePoint.transform.position, firePoint.transform.rotation);
         newBullet.gameObject.SetActive(true);
     }
+
+
 
     protected virtual FirePoint GetFirePoint()
     {

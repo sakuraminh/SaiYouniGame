@@ -6,7 +6,19 @@ using UnityEngine;
 public class BulletDameSender : DameSender
 {
     [SerializeField] protected SphereCollider sphereCollider;
-    [SerializeField] protected EffectDespawner despawn;
+    [SerializeField] protected EffectDespawner effectDespawner;
+
+    //============================================================================================================================================
+
+    protected override DameReceive SendDamage(Collider collider)
+    {
+        DameReceive damageReceiver = base.SendDamage(collider);
+        if (damageReceiver == null) return null;
+        this.effectDespawner.DoDespawn();
+        return damageReceiver;
+    }
+
+    //============================================================================================================================================
 
     protected override void LoadComponents()
     {
@@ -16,8 +28,8 @@ public class BulletDameSender : DameSender
 
     protected virtual void LoadDespawn()
     {
-        if (this.despawn != null) return;
-        this.despawn = transform.parent.GetComponentInChildren<EffectDespawner>();
+        if (this.effectDespawner != null) return;
+        this.effectDespawner = transform.parent.GetComponentInChildren<EffectDespawner>();
         Debug.Log(transform.name + ": LoadDespawn", gameObject);
     }
     protected override void LoadTriggerCollider()
@@ -29,11 +41,5 @@ public class BulletDameSender : DameSender
         sphereCollider.radius = 0.5f;
         Debug.Log(transform.name + ": LoadTriggerCollider", gameObject);
     }
-    protected override DameReceive SendDamage(Collider collider)
-    {
-        DameReceive damageReceiver = base.SendDamage(collider);
-        if (damageReceiver == null) return null;
-        this.despawn.DoDespawn();
-        return damageReceiver;
-    }
+
 }

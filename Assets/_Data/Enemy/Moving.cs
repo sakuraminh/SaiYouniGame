@@ -33,9 +33,8 @@ public class Moving : EnemyAbs
 
     protected virtual void MovingToTarget()
     {
-        this.MovingStatus();
-        //Debug.Log(transform.parent.gameObject.name + this.isMoving, transform.parent.gameObject);
-        if (this.isFinish && enemyCtrl.EnemyDameReceive.IsDead)
+        this.SetMoving();
+        if (this.isFinish)
         {
             this.enemyCtrl.Agent.isStopped = this.isFinish;
             Debug.Log("Finish", gameObject);
@@ -65,11 +64,11 @@ public class Moving : EnemyAbs
         this.distance = Vector3.Distance(this.transform.position, this.targetPoint.Targets[this.targetIndex].transform.position);
     }
 
-    protected virtual void MovingStatus()
+    protected virtual void SetMoving()
     {
-        if (enemyCtrl.EnemyDameReceive.IsDead)
+        if (enemyCtrl.EnemyDameReceive.SetIsDead())
         {
-            this.isMoving = !enemyCtrl.EnemyDameReceive.IsDead;
+            this.isMoving = !enemyCtrl.EnemyDameReceive.SetIsDead();
             this.EnemyCtrl.Animator.SetBool("isMoving", this.isMoving);
             return;
         }
