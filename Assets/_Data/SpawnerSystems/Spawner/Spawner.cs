@@ -50,8 +50,6 @@ public abstract class Spawner<T> : MMonoBehaviour where T : PoolObj
         return newObj;
     }
 
-
-
     public virtual void Despawn(T obj)
     {
         if (obj is MonoBehaviour monoBehaviour)
@@ -101,7 +99,5 @@ public abstract class Spawner<T> : MMonoBehaviour where T : PoolObj
         if (this.hold == null) this.hold = new GameObject("Hold").transform;
         hold.transform.parent = this.transform;
         Debug.Log(transform.name + " LoadHold", gameObject);
-
     }
-
 }

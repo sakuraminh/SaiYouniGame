@@ -21,14 +21,14 @@ public class Moving : EnemyAbs
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.GetTargetPoint();
+        this.LoadTargetPoint();
     }
 
-    private void GetTargetPoint()
+    private void LoadTargetPoint()
     {
         if (this.targetPoint != null) return;
-        Debug.Log("LoadComponent", gameObject);
-        this.targetPoint = GameObject.Find("TargetPoint").GetComponent<TargetPoint>();
+        this.targetPoint = PointCtrlS.Instance.TargetPoint;
+        Debug.Log(transform.name + ": LoadComponent", gameObject);
     }
 
     protected virtual void MovingToTarget()

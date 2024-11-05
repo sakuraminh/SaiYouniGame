@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnPoint1 : SpawnPointCtrl
+public class SpawnPoint1 : SpawnPoint
 {
 
 }

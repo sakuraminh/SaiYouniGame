@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class TowerCtrl : MMonoBehaviour
 {
+    [Header("TowerCtrl Parent Class Variables")]
+
     [SerializeField] protected TowerRadar towerRadar;
     public TowerRadar TowerRadar => towerRadar;
 
@@ -27,7 +29,7 @@ public abstract class TowerCtrl : MMonoBehaviour
     protected virtual void LoadRotator()
     {
         if (this.rotator != null) return;
-        this.rotator = transform.Find("Model").Find("Rotator");
+        this.rotator = transform.Find("Model").Find("TowerRotator");
         Debug.Log(transform.name + ": LoadRotator", gameObject);
     }
 }

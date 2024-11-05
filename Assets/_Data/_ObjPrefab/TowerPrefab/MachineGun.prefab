@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735bc539559462f45941d0b40092cf1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ctrl: {fileID: 0}
+  towerCtrl: {fileID: 702162182093717957}
+  bulletCtrl: {fileID: 0}
   target: {fileID: 0}
   timer: 0
   delay: 1
@@ -317,7 +318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8469670622569200899}
-  - component: {fileID: 4480447233700616656}
+  - component: {fileID: 702162182093717957}
   m_Layer: 0
   m_Name: MachineGun
   m_TagString: Untagged
@@ -343,7 +344,7 @@ Transform:
   - {fileID: 6025788107044276652}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4480447233700616656
+--- !u!114 &702162182093717957
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -355,8 +356,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb12cfe5a0c1cd47b0aa84c71b5ad3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radar: {fileID: 0}
-  rotator: {fileID: 0}
+  towerRadar: {fileID: 7577599545623973940}
+  rotator: {fileID: 1302020286221120605}
 --- !u!1 &7504805585199974583
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +456,7 @@ MonoBehaviour:
   _collider: {fileID: 7060974496755409534}
   _rigibody: {fileID: 8295544039402912894}
   enemies: []
+  enemiesDelete: []
 --- !u!1 &7735270917760647143
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,8 +582,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1302020286221120605}
+  - component: {fileID: 1722240686973224955}
   m_Layer: 0
-  m_Name: Rotator
+  m_Name: TowerRotator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -604,3 +607,15 @@ Transform:
   - {fileID: 587122987100943126}
   m_Father: {fileID: 4484819011857508}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1722240686973224955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8953492620900251162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b9c591edd7acee4eb1656cf14cda722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

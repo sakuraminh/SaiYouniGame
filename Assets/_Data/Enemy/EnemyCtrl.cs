@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public abstract class EnemyCtrl : PoolObj
 {
+    [Header("EnemyCtrl Parent Class Variables")]
     [SerializeField] protected NavMeshAgent agent;
     public NavMeshAgent Agent => this.agent;
 

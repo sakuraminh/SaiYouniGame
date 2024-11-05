@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class EffectCtrl : PoolObj
 {
+    [Header("EffectCtrl Parent Class Variables")]
     [SerializeField] protected BulletMoving bulletMoving;
     public BulletMoving BulletMoving => this.bulletMoving;
 
@@ -13,13 +14,18 @@ public abstract class EffectCtrl : PoolObj
     [SerializeField] protected EffectDespawner effectDespawner;
     public EffectDespawner EffectDespawner => this.effectDespawner;
 
+
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadBulletMoving();
         this.LoadBulletDameSender();
         this.LoadEffectDespawner();
+
     }
+
+
 
     protected virtual void LoadEffectDespawner()
     {
@@ -41,5 +47,7 @@ public abstract class EffectCtrl : PoolObj
         this.bulletMoving = GetComponentInChildren<BulletMoving>();
         Debug.Log(transform.name + " LoadBulletMoving", gameObject);
     }
+
+
 }
 

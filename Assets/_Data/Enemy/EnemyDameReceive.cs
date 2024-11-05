@@ -13,7 +13,9 @@ public class EnemyDameReceive : DameReceive
         this.capsuleCollider.enabled = false;
         enemyCtrl.Animator.SetBool("isDead", enemyCtrl.EnemyDameReceive.IsDead);
         Invoke(nameof(CallDespawn), 4f);
-        //this.CallDespawn();
+
+        InventoriesManager.Instance.AddItem(ItemCode.Gold, 1);
+        InventoriesManager.Instance.AddItem(ItemCode.PlayerExp, 1);
     }
     protected override void OnHurt()
     {
@@ -25,29 +27,26 @@ public class EnemyDameReceive : DameReceive
     }
     protected void OnAnimation(Collider collider)
     {
-        this.SetHit(collider);
-        this.enemyCtrl.Animator.SetBool("isHit", this.isHit);
-        this.enemyCtrl.Agent.speed = 0.5f;
-        Invoke(nameof(SetHitFalse), 1f);
+        //this.SetHit(collider);
+        this.enemyCtrl.Animator.SetBool("isHit", this.SetHit(collider));
+        this.enemyCtrl.Agent.speed = 0.1f;
+        Invoke(nameof(SetHitFalse), 0.2f);
     }
+
     protected void SetHitFalse()
     {
         this.isHit = false;
         this.enemyCtrl.Animator.SetBool("isHit", this.isHit);
         this.enemyCtrl.Agent.speed = 2;
     }
-    protected virtual void SetHit(Collider collider)
+    protected virtual bool SetHit(Collider collider)
     {
         DameSender sender = collider.GetComponent<DameSender>();
-        this.isHit = sender != null;
+        return this.isHit = sender != null;
     }
     protected virtual void CallDespawn()
     {
         this.enemyCtrl.Despawn.DoDespawn();
-        //if (enemyCtrl.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !enemyCtrl.Animator.IsInTransition(0))
-        //{
-        //    this.enemyCtrl.Despawn.DoDespawn();
-        //}
     }
 
     protected override void Reborn()

@@ -30,6 +30,4 @@ public class EffectSpawnerCtrlSingleton : MSingleton<EffectSpawnerCtrlSingleton>
         this.bulletCtrl = GetComponentInChildren<BulletCtrl>();
         Debug.Log(transform.name + " LoadBulletCtrl", gameObject);
     }
-
-
 }

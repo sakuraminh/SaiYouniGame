@@ -5,7 +5,9 @@ using UnityEngine;
 public abstract class TowerAbstract : MMonoBehaviour
 {
 
-    [SerializeField] protected TowerCtrl ctrl;
+    [SerializeField] protected TowerCtrl towerCtrl;
+
+    [SerializeField] protected BulletCtrl bulletCtrl;
 
 
     protected override void LoadComponents()
@@ -16,8 +18,8 @@ public abstract class TowerAbstract : MMonoBehaviour
 
     protected virtual void LoadTowerCtrl()
     {
-        if (this.ctrl != null) return;
-        this.ctrl = transform.parent.GetComponent<TowerCtrl>();
+        if (this.towerCtrl != null) return;
+        this.towerCtrl = transform.parent.GetComponent<TowerCtrl>();
         Debug.Log(transform.name + ": LoadTowerCtrl", gameObject);
     }
 }

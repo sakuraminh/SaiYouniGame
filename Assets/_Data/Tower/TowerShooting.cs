@@ -26,13 +26,13 @@ public class TowerShooting : TowerAbstract
 
     protected virtual void GetTarget()
     {
-        this.target = this.ctrl.TowerRadar.GetTarget();
+        this.target = this.towerCtrl.TowerRadar.GetTarget();
     }
 
     protected virtual void LookAtTarget()
     {
         if (this.target == null) return;
-        this.ctrl.Rotator.LookAt(this.target.transform.position);
+        this.towerCtrl.Rotator.LookAt(this.target.Targetable.transform.position);
     }
 
     protected virtual void Shooting()
@@ -48,8 +48,6 @@ public class TowerShooting : TowerAbstract
         newBullet.gameObject.SetActive(true);
     }
 
-
-
     protected virtual FirePoint GetFirePoint()
     {
         //int pointIndex = Random.Range(0, this.firePoints.Count);
@@ -61,7 +59,7 @@ public class TowerShooting : TowerAbstract
     protected virtual void LoadFirePoints()
     {
         if (this.firePoints.Count != 0) return;
-        FirePoint[] points = this.ctrl.GetComponentsInChildren<FirePoint>();
+        FirePoint[] points = this.towerCtrl.GetComponentsInChildren<FirePoint>();
         this.firePoints = new List<FirePoint>(points);
         Debug.Log(transform.name + ": LoadFirePoints", gameObject);
     }

@@ -9,4 +9,9 @@ public class EffectDespawner : Despawner<EffectCtrl>
         base.Update();
         this.DespawnByTime();
     }
+
+    protected virtual void Test()
+    {
+        //TowerCtrlSingletonTest.Instance.TowerRadar;
+    }
 }

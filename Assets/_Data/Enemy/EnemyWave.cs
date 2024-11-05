@@ -31,7 +31,7 @@ public class EnemyWave : MMonoBehaviour
     }
     protected virtual SpawnPointCtrl GetPos()
     {
-        SpawnPointCtrl newPoint = SpawnPointCtrlSingleton.Instance.GetRandomPoint(SpawnPointCtrlSingleton.Instance.ListSpawnPoint.Count, SpawnPointCtrlSingleton.Instance.ListSpawnPoint);
+        SpawnPoint newPoint = PointCtrlS.Instance.SpawnPoint.GetRandomPoint(PointCtrlS.Instance.SpawnPoint.ListSpawnPoint.Count, PointCtrlS.Instance.SpawnPoint.ListSpawnPoint);
         return newPoint;
     }
     public virtual void CheckDead()
