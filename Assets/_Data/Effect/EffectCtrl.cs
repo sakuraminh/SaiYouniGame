@@ -14,9 +14,6 @@ public class EffectCtrl : MMonoBehaviour
     [SerializeField] protected EffectDespawner effectDespawner;
     public EffectDespawner EffectDespawner => this.effectDespawner;
 
-    [SerializeField] protected ModelCtrl modelCtrl;
-    public ModelCtrl ModelCtrl => this.modelCtrl;
-
 
 
     protected override void LoadComponents()
@@ -25,14 +22,6 @@ public class EffectCtrl : MMonoBehaviour
         this.LoadEffectMoving();
         this.LoadEffectDameSender();
         this.LoadEffectDespawner();
-        this.LoadModelCtrl();
-    }
-
-    protected virtual void LoadModelCtrl()
-    {
-        if (this.modelCtrl != null) return;
-        this.modelCtrl = GetComponentInChildren<ModelCtrl>();
-        //Debug.Log(transform.name + " LoadModelCtrl", gameObject);
     }
 
     protected virtual void LoadEffectDespawner()

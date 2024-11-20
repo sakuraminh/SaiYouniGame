@@ -7,115 +7,99 @@ using UnityEngine;
 public class PMoving : PlayerAbs
 {
     [SerializeField] protected Rigidbody _rigidbody;
-    public Rigidbody Rigidbody => this._rigidbody;
-
-    [SerializeField] protected Transform _camera;
-
+    [SerializeField] protected Camera mainCamera;
     [SerializeField] protected Animator animator;
 
-    [SerializeField] protected Vector3 movement;
-    [SerializeField] protected Vector3 forward;
-    [SerializeField] protected Vector3 right;
-    [SerializeField] protected Vector3 moveDirection;
-
+    [SerializeField] protected float turnSpeet = 15;
     [SerializeField] protected float moveSpeed = 5f;
-    [SerializeField] protected float rotationSpeed = 720f;
-
-    [SerializeField] protected bool isMoving = true;
-
 
     [SerializeField] protected Vector2 input;
 
+    [SerializeField] protected bool isMoving = true;
+
+    protected Vector3 moveDirection;
+
     protected virtual void Update()
     {
-        this.SetInput();
-        this.RedirectionOnCamera();
-        this.CalculateDirection();
-        this.RotateInDirection();
-        this.PlayerMoving();
+        this.UpdateInput();
+        this.CalculateMoveDirection();
+        this.UpdateAnimator();
     }
-    protected virtual void SetInput()
+
+    protected virtual void FixedUpdate()
+    {
+        this.CharacterAiming();
+        this.MoveCharacter();
+    }
+    protected virtual void UpdateInput()
     {
         this.input.x = InputManageS.Instance.XHorizontal;
         this.input.y = InputManageS.Instance.YVertical;
-        this.SetAnimation();
     }
-    protected virtual void SetAnimation()
+
+    protected virtual void CharacterAiming()
+    {
+        float yawCamera = this.mainCamera.transform.rotation.eulerAngles.y;
+
+        transform.parent.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, yawCamera, 0), this.turnSpeet * Time.fixedDeltaTime);
+    }
+
+    protected virtual void CalculateMoveDirection()
+    {
+        Vector3 forward = this.mainCamera.transform.forward;
+        Vector3 right = this.mainCamera.transform.right;
+
+        forward.y = 0;
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+        this.moveDirection = (forward * this.input.y + right * this.input.x).normalized;
+        this.isMoving = this.input != Vector2.zero;
+    }
+
+    protected virtual void MoveCharacter()
+    {
+        if (!this.isMoving) return;
+
+        Vector3 velocity = this.moveDirection * this.moveSpeed;
+        this._rigidbody.MovePosition(this._rigidbody.position + velocity * Time.fixedDeltaTime);
+    }
+
+    protected virtual void UpdateAnimator()
     {
         this.animator.SetFloat("InputX", this.input.x);
         this.animator.SetFloat("InputY", this.input.y);
-
-
-    }
-    protected virtual void PlayerMoving()
-    {
-
-        if (this.isMoving == false) return;
-
-        Vector3 moveVelocity = moveDirection * moveSpeed;
-        this._rigidbody.MovePosition(this._rigidbody.position + moveVelocity * Time.fixedDeltaTime);
-
-
-    }
-    protected virtual void RedirectionOnCamera()
-    {
-        this.forward = this._camera.forward;
-        this.right = this._camera.right;
-
-        this.forward.y = 0;
-        this.right.y = 0;
-
-        this.forward.Normalize();
-        this.right.Normalize();
-    }
-
-    protected virtual void CalculateDirection()
-    {
-        this.moveDirection = (forward * InputManageS.Instance.YVertical + right * InputManageS.Instance.XHorizontal).normalized;
-        if (this.input == Vector2.zero)
-        {
-            this.isMoving = false;
-            return;
-        }
-
-        this.isMoving = true;
-    }
-
-    protected virtual void RotateInDirection()
-    {
-        if (moveDirection != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            this._rigidbody.rotation = Quaternion.Slerp(this._rigidbody.rotation, targetRotation, Time.deltaTime * 10f);
-        }
     }
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadRigidbody();
+        this.LoadMainCamera();
         this.LoadAnimator();
-        this.LoadCamera();
     }
+
     protected void LoadRigidbody()
     {
         if (this._rigidbody != null) return;
-        this._rigidbody = transform.parent.GetComponent<Rigidbody>();
+        this._rigidbody = GetComponentInParent<Rigidbody>();
         Debug.Log(transform.name + ": LoadRigidbody", gameObject);
     }
-    protected void LoadCamera()
+
+    protected virtual void LoadMainCamera()
     {
-        if (this._camera != null) return;
-        this._camera = GameObject.Find("Camera").transform;
-        Debug.Log(transform.name + ": LoadCamera", gameObject);
+        if (mainCamera != null) return;
+        this.mainCamera = Camera.main;
+        Cursor.lockState = CursorLockMode.Locked;
+        Debug.Log(transform.name + ": LoadMainCamera", gameObject);
     }
 
     protected virtual void LoadAnimator()
     {
         if (this.animator != null) return;
-        this.animator = transform.parent.GetComponentInChildren<Animator>();
+        this.animator = transform.parent.Find("Model").GetComponent<Animator>();
         Debug.Log(transform.name + ": LoadAnimator", gameObject);
     }
-
-
 }
