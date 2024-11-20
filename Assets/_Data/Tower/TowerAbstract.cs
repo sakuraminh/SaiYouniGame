@@ -7,8 +7,6 @@ public abstract class TowerAbstract : MMonoBehaviour
 
     [SerializeField] protected TowerCtrl towerCtrl;
 
-    [SerializeField] protected BulletCtrl bulletCtrl;
-
 
     protected override void LoadComponents()
     {

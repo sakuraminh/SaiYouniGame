@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMoving : MMonoBehaviour
+public class BulletMoving : EffectMoving
 {
     public float speed = 10f;
 

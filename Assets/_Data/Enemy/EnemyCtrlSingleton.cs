@@ -6,8 +6,8 @@ using UnityEngine.AI;
 
 public class EnemyCtrlSingleton : MSingleton<EnemyCtrlSingleton>
 {
-    [SerializeField] private EnemyPrefab enemyPrefab;
-    public EnemyPrefab EnemyPrefab => this.enemyPrefab;
+    [SerializeField] private EPrefab enemyPrefab;
+    public EPrefab EnemyPrefab => this.enemyPrefab;
 
     [SerializeField] private EnemySpawner enemySpawner;
     public EnemySpawner EnemySpawner => this.enemySpawner;
@@ -33,7 +33,7 @@ public class EnemyCtrlSingleton : MSingleton<EnemyCtrlSingleton>
     protected void LoadEnemyPrefab()
     {
         if (this.enemyPrefab != null) return;
-        this.enemyPrefab = GetComponentInChildren<EnemyPrefab>();
+        this.enemyPrefab = GetComponentInChildren<EPrefab>();
         Debug.Log("LoadEnemyPrefab", gameObject);
     }
     protected void LoadEnemyWave()

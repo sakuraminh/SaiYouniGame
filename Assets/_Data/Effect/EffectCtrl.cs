@@ -2,30 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EffectCtrl : PoolObj
+public class EffectCtrl : MMonoBehaviour
 {
     [Header("EffectCtrl Parent Class Variables")]
-    [SerializeField] protected BulletMoving bulletMoving;
-    public BulletMoving BulletMoving => this.bulletMoving;
+    [SerializeField] protected EffectMoving effectMoving;
+    public EffectMoving EffectMoving => this.effectMoving;
 
-    [SerializeField] protected BulletDameSender bulletDameSender;
-    public BulletDameSender BulletDameSender => this.bulletDameSender;
+    [SerializeField] protected DameSender effectDameSender;
+    public DameSender EffectDameSender => this.effectDameSender;
 
     [SerializeField] protected EffectDespawner effectDespawner;
     public EffectDespawner EffectDespawner => this.effectDespawner;
+
+    [SerializeField] protected ModelCtrl modelCtrl;
+    public ModelCtrl ModelCtrl => this.modelCtrl;
 
 
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadBulletMoving();
-        this.LoadBulletDameSender();
+        this.LoadEffectMoving();
+        this.LoadEffectDameSender();
         this.LoadEffectDespawner();
-
+        this.LoadModelCtrl();
     }
 
-
+    protected virtual void LoadModelCtrl()
+    {
+        if (this.modelCtrl != null) return;
+        this.modelCtrl = GetComponentInChildren<ModelCtrl>();
+        //Debug.Log(transform.name + " LoadModelCtrl", gameObject);
+    }
 
     protected virtual void LoadEffectDespawner()
     {
@@ -34,20 +42,18 @@ public abstract class EffectCtrl : PoolObj
         Debug.Log(transform.name + " LoadEffectDespawner", gameObject);
     }
 
-    protected virtual void LoadBulletDameSender()
+    protected virtual void LoadEffectDameSender()
     {
-        if (bulletDameSender != null) return;
-        this.bulletDameSender = GetComponentInChildren<BulletDameSender>();
-        Debug.Log(transform.name + " LoadBulletDameSender", gameObject);
+        if (effectDameSender != null) return;
+        this.effectDameSender = GetComponentInChildren<DameSender>();
+        Debug.Log(transform.name + " LoadEffectDameSender", gameObject);
     }
 
-    protected virtual void LoadBulletMoving()
+    protected virtual void LoadEffectMoving()
     {
-        if (bulletMoving != null) return;
-        this.bulletMoving = GetComponentInChildren<BulletMoving>();
-        Debug.Log(transform.name + " LoadBulletMoving", gameObject);
+        if (effectMoving != null) return;
+        this.effectMoving = GetComponentInChildren<EffectMoving>();
+        Debug.Log(transform.name + " LoadEffectMoving", gameObject);
     }
-
-
 }
 

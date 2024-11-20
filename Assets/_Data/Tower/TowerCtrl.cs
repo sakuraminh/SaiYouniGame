@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TowerCtrl : MMonoBehaviour
+public class TowerCtrl : MMonoBehaviour
 {
     [Header("TowerCtrl Parent Class Variables")]
 

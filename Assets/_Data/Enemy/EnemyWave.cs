@@ -6,8 +6,8 @@ public class EnemyWave : MMonoBehaviour
 {
     [SerializeField] protected float spawnSpeed = 5f;
     [SerializeField] protected int maxSpawn = 10;
-    [SerializeField] protected List<EnemyCtrl> spawnedEnemies = new();
-    [SerializeField] protected List<EnemyCtrl> enemiDead = new();
+    [SerializeField] protected List<Enemy> spawnedEnemies = new();
+    [SerializeField] protected List<Enemy> enemiDead = new();
 
     protected override void Start()
     {
@@ -24,22 +24,22 @@ public class EnemyWave : MMonoBehaviour
         Invoke(nameof(this.Spawning), this.spawnSpeed);
         if (this.spawnedEnemies.Count >= this.maxSpawn) return;
 
-        EnemyCtrl prefab = EnemyCtrlSingleton.Instance.EnemyPrefab.GetRandom();
-        EnemyCtrl newEnemy = EnemyCtrlSingleton.Instance.EnemySpawner.Spawn(prefab, GetPos().transform.position);
+        Enemy prefab = GameCtrlS.Instance.EParentCtrl.EPrefab.GetRandom();
+        Enemy newEnemy = GameCtrlS.Instance.EParentCtrl.EnemySpawner.Spawn(prefab, GetPos().transform.position);
         newEnemy.gameObject.SetActive(true);
         this.spawnedEnemies.Add(newEnemy);
     }
-    protected virtual SpawnPointCtrl GetPos()
+    protected virtual SpawnPoint1 GetPos()
     {
-        SpawnPoint newPoint = PointCtrlS.Instance.SpawnPoint.GetRandomPoint(PointCtrlS.Instance.SpawnPoint.ListSpawnPoint.Count, PointCtrlS.Instance.SpawnPoint.ListSpawnPoint);
+        SpawnPoint1 newPoint = GameCtrlS.Instance.OPerentCtrl.SpawnPoint.GetRandomPoint();
         return newPoint;
     }
     public virtual void CheckDead()
     {
-        //if (this.spawnedEnemies == null) return;
-        foreach (EnemyCtrl enemyCtrl in this.spawnedEnemies)
+        if (this.spawnedEnemies == null) return;
+        foreach (Enemy enemyCtrl in this.spawnedEnemies)
         {
-            if (enemyCtrl.EnemyDameReceive.SetIsDead())
+            if (enemyCtrl.EnemyCtrl.EnemyDameReceive.SetIsDead())
             {
                 this.enemiDead.Add(enemyCtrl);
             }
@@ -48,8 +48,8 @@ public class EnemyWave : MMonoBehaviour
     }
     protected virtual void RemoveDead()
     {
-        //if (this.enemiDead == null) return;
-        foreach (EnemyCtrl enemyCtrl in this.enemiDead)
+        if (this.enemiDead == null) return;
+        foreach (Enemy enemyCtrl in this.enemiDead)
         {
             this.spawnedEnemies.Remove(enemyCtrl);
         }

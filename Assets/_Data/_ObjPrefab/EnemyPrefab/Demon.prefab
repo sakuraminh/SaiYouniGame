@@ -752,7 +752,7 @@ MonoBehaviour:
   isDead: 0
   currenHp: 10
   maxHp: 10
-  enemyCtrl: {fileID: 4961145810372480452}
+  enemyCtrl: {fileID: 4376280448380491388}
 --- !u!136 &5986146722569760805
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1574,7 +1574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34ea1fc520ddd9428a798e860fc4759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCtrl: {fileID: 4961145810372480452}
+  enemyCtrl: {fileID: 4376280448380491388}
   targetPoint: {fileID: 0}
   targetIndex: 0
   distance: Infinity
@@ -1895,8 +1895,8 @@ Transform:
   m_GameObject: {fileID: 7385616761336217248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2.371, z: 0}
+  m_LocalScale: {x: 1, y: 0.026895, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8009781417159263781}
@@ -2458,6 +2458,7 @@ GameObject:
   - component: {fileID: 8009781417159263781}
   - component: {fileID: 7602492763115055469}
   - component: {fileID: 4961145810372480452}
+  - component: {fileID: 4376280448380491388}
   m_Layer: 0
   m_Name: Demon
   m_TagString: Untagged
@@ -2494,7 +2495,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8970861670760838611}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.51
+  m_Radius: 0.5
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -2503,7 +2504,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2.98
+  m_Height: 3
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -2520,6 +2521,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawn: {fileID: 4360287269581583706}
+  enemyCtrl: {fileID: 4376280448380491388}
+--- !u!114 &4376280448380491388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8970861670760838611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb663204846d1540b0f3ff02ca4f0c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 4961145810372480452}
   agent: {fileID: 7602492763115055469}
   animator: {fileID: 4462621483821594337}
   moving: {fileID: 8413500579602565258}

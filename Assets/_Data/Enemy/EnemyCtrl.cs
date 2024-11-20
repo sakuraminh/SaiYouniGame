@@ -3,23 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class EnemyCtrl : PoolObj
+public class EnemyCtrl : MMonoBehaviour
 {
     [Header("EnemyCtrl Parent Class Variables")]
+
+    [SerializeField] protected Enemy enemy;
+    public Enemy Enemy => this.enemy;
+
     [SerializeField] protected NavMeshAgent agent;
     public NavMeshAgent Agent => this.agent;
 
     [SerializeField] protected Animator animator;
     public Animator Animator => this.animator;
 
-    [SerializeField] protected Moving moving;
-    public Moving Moving => this.moving;
+    [SerializeField] protected BaseEMoving moving;
+    public BaseEMoving Moving => this.moving;
 
     [SerializeField] protected Targetable targetable;
     public Targetable Targetable => this.targetable;
 
     [SerializeField] protected EnemyDameReceive enemyDameReceive;
     public EnemyDameReceive EnemyDameReceive => this.enemyDameReceive;
+
+    //[SerializeField] protected EnemyDameReceive enemyDameReceive;
+    //public EnemyDameReceive EnemyDameReceive => this.enemyDameReceive;
 
 
 
@@ -33,6 +40,14 @@ public abstract class EnemyCtrl : PoolObj
         this.LoadMoving();
         this.LoadTargetable();
         this.LoadEnemyDameReceive();
+        this.LoadEnemy();
+    }
+
+    protected void LoadEnemy()
+    {
+        if (this.enemy != null) return;
+        this.enemy = GetComponent<Enemy>();
+        Debug.Log("LoadEnemy", gameObject);
     }
     protected void LoadEnemyDameReceive()
     {
@@ -50,7 +65,7 @@ public abstract class EnemyCtrl : PoolObj
     protected void LoadMoving()
     {
         if (this.moving != null) return;
-        this.moving = GetComponentInChildren<Moving>();
+        this.moving = GetComponentInChildren<BaseEMoving>();
         Debug.Log("LoadMoving", gameObject);
     }
 

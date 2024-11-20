@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnPoint : SpawnPointCtrl
 {
-    public virtual SpawnPoint GetRandomPoint(int count, List<SpawnPoint> spawnPoints)
+    public virtual SpawnPoint1 GetRandomPoint()
     {
-        int ran = Random.Range(0, spawnPoints.Count);
-        return spawnPoints[ran];
+        int ran = Random.Range(0, this.listSpawnPoint.Count);
+        return this.listSpawnPoint[ran];
     }
 
 }

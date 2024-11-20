@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class PoolPrefabs<T> : MMonoBehaviour where T : PoolObj
 {
     [SerializeField] protected List<T> prefabs = new();
+    public List<T> Prefabs => this.prefabs;
 
     protected override void Awake()
     {

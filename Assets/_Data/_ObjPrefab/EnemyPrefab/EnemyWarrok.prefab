@@ -51,7 +51,7 @@ MonoBehaviour:
   isDead: 0
   currenHp: 10
   maxHp: 10
-  enemyCtrl: {fileID: 6713945453934754899}
+  enemyCtrl: {fileID: 7936755562163585159}
 --- !u!136 &5513197385370683520
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1208,8 +1208,8 @@ Transform:
   m_GameObject: {fileID: 3848842087851667322}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1.372, z: 0}
+  m_LocalScale: {x: 1, y: 0.1983, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1630522832798910131}
@@ -1246,9 +1246,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3867459135808955532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,13 +2218,14 @@ GameObject:
   - component: {fileID: 1630522832798910131}
   - component: {fileID: 4310152167450131869}
   - component: {fileID: 6713945453934754899}
+  - component: {fileID: 7936755562163585159}
   m_Layer: 0
   m_Name: EnemyWarrok
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1630522832798910131
 Transform:
   m_ObjectHideFlags: 0
@@ -2280,6 +2281,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawn: {fileID: 8226389612257081764}
+  enemyCtrl: {fileID: 7936755562163585159}
+--- !u!114 &7936755562163585159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6726185548661120975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb663204846d1540b0f3ff02ca4f0c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 6713945453934754899}
   agent: {fileID: 4310152167450131869}
   animator: {fileID: 5018064042879460757}
   moving: {fileID: 2551688199082792406}
@@ -2998,7 +3013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34ea1fc520ddd9428a798e860fc4759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCtrl: {fileID: 6713945453934754899}
+  enemyCtrl: {fileID: 7936755562163585159}
   targetPoint: {fileID: 0}
   targetIndex: 0
   distance: Infinity

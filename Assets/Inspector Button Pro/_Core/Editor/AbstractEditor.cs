@@ -344,7 +344,7 @@ namespace com.cyborgAssets.internalIBPEditor
 
         //public static void AssemblyUpdate()
         //{
-        //    //Type assemblyResult = Type.GetType("com.cyborgAssets.internalIBPProPrem.AbstractProEditor");
+        //    //Type assemblyResult = Type.GetTypeWeapon("com.cyborgAssets.internalIBPProPrem.AbstractProEditor");
         //    //if (assemblyResult == null)
         //    if (IsDemoVersion())
         //    {

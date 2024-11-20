@@ -27,7 +27,7 @@ public class EnemyDameReceive : DameReceive
     }
     protected void OnAnimation(Collider collider)
     {
-        //this.SetHit(collider);
+        this.SetHit(collider);
         this.enemyCtrl.Animator.SetBool("isHit", this.SetHit(collider));
         this.enemyCtrl.Agent.speed = 0.1f;
         Invoke(nameof(SetHitFalse), 0.2f);
@@ -46,7 +46,7 @@ public class EnemyDameReceive : DameReceive
     }
     protected virtual void CallDespawn()
     {
-        this.enemyCtrl.Despawn.DoDespawn();
+        this.enemyCtrl.Enemy.Despawn.DoDespawn();
     }
 
     protected override void Reborn()
