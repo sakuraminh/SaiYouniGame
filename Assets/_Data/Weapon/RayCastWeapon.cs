@@ -16,7 +16,7 @@ public class RayCastWeapon : WeaponAbs
     [SerializeField] protected Ray ray;
 
     [SerializeField] protected RaycastHit hit;
-    public virtual void StartFiring()
+    public virtual void StartFiring(float delay, string prefabName)
     {
         this.isFiring = true;
         this.ray.origin = rayCastOrigin.transform.position;
@@ -30,7 +30,7 @@ public class RayCastWeapon : WeaponAbs
             Debug.DrawLine(this.ray.origin, this.hit.point, Color.red, 1.0f);
         }
 
-        this.weapon.WeaponCtrl.WeaponShooting.PWeaponShooting(rotation);
+        this.weapon.WeaponCtrl.WeaponShooting.PWeaponShooting(delay, prefabName, rotation);
     }
 
     public virtual void StopFiring()

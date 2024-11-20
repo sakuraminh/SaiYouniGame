@@ -23,6 +23,11 @@ public class InputManageS : MSingleton<InputManageS>
     [SerializeField] protected bool tab;
     public bool Tab => this.tab;
 
+    [SerializeField] protected bool mouseButton1;
+    public bool MouseButton1 => this.mouseButton1;
+
+    [SerializeField] protected bool mouseButtonDown1;
+    public bool MouseButtonDown1 => this.mouseButtonDown1;
 
     protected virtual void Update()
     {
@@ -32,6 +37,8 @@ public class InputManageS : MSingleton<InputManageS>
         this.LoadFireUp1();
         this.LoadMouseButton0();
         this.LoadTab();
+        this.LoadMouseButton1();
+        this.LoadMouseButtonDown1();
     }
 
     protected virtual void FixedUpdate()
@@ -66,6 +73,16 @@ public class InputManageS : MSingleton<InputManageS>
     protected virtual void LoadTab()
     {
         this.tab = Input.GetKeyDown(KeyCode.Tab);
+    }
+
+    protected virtual void LoadMouseButton1()
+    {
+        this.mouseButton1 = Input.GetMouseButton(1);
+    }
+
+    protected virtual void LoadMouseButtonDown1()
+    {
+        this.mouseButtonDown1 = Input.GetMouseButtonDown(1);
     }
 
 }
